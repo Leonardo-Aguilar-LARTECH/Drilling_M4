@@ -138,9 +138,32 @@ class Bicicleta(Vehiculo):
             self.tipo = tipo
         else:
             raise ValueError(f"valor no Valido, {tipos_permitidos}")
-        
-    def __str__(self) -> str:
-        return "class: Bicicleta"
+    
+    @staticmethod
+    def guardar_bicicletas():
+        archivo = open("modules/db/db_bicicletas.csv", "w", encoding="UTF-8")
+        cont = 0
+        for auto in lg.listado_bicicletas:
+            archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.velocidad};{auto.cilindrada}\n")
+        else:
+            archivo.close()
+    
+    @staticmethod
+    def leer_bicicletas():
+        if not path.exists("modules/db/db_bicicletas.csv"):
+            archivo = open("modules/db/db_bicicletas.csv","w", encoding="UTF-8")
+        else:
+            archivo = open("modules/db/db_bicicletas.csv","r", encoding="UTF-8")
+            lineas = archivo.readlines()
+            for linea in lineas:
+                linea = linea.strip()
+                auto_data = linea.split(";")
+                marca, modelo, nroRuedas, velocidad, cilindrada = auto_data
+                automovil = Automovil(marca, modelo, int(
+                    nroRuedas), int(velocidad), int(cilindrada))
+                lg.listado_bicicletas.append(automovil)
+        archivo.close()
+        return lg.listado_bicicletas
 
 class Motocicleta(Vehiculo):
     def __init__(self, marca: str, modelo: str, nroRuedas: int,nroRadios: int, cuadro: str, motor: str) -> None:
@@ -158,6 +181,32 @@ class Motocicleta(Vehiculo):
             self.motor = motor.upper()
         else:
             raise ValueError(f"valor no valido, {motores_disponibles}")
+    
+    @staticmethod
+    def guardar_motocicletas():
+        archivo = open("modules/db/db_motocicletas.csv", "w", encoding="UTF-8")
+        cont = 0
+        for auto in lg.listado_motocicletas:
+            archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.velocidad};{auto.cilindrada}\n")
+        else:
+            archivo.close()
+    
+    @staticmethod
+    def leer_motocicletas():
+        if not path.exists("modules/db/db_motocicletas.csv"):
+            archivo = open("modules/db/db_motocicletas.csv","w", encoding="UTF-8")
+        else:
+            archivo = open("modules/db/db_motocicletas.csv","r", encoding="UTF-8")
+            lineas = archivo.readlines()
+            for linea in lineas:
+                linea = linea.strip()
+                auto_data = linea.split(";")
+                marca, modelo, nroRuedas, velocidad, cilindrada = auto_data
+                automovil = Automovil(marca, modelo, int(
+                    nroRuedas), int(velocidad), int(cilindrada))
+                lg.listado_motocicletas.append(automovil)
+        archivo.close()
+        return lg.listado_motocicletas
 
 class EnteroError(Exception):
     def __init__(self, valor, mensaje = "Error de Valor, valor ingresado no es un Entero") -> None:
