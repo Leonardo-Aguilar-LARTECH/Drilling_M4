@@ -129,7 +129,6 @@ class Carga(Automovil):
         archivo.close()
         return lg.listado_veh_carga
 
-
 class Bicicleta(Vehiculo):
     def __init__(self, marca: str, modelo: str, nroRuedas: int, tipo: str) -> None:
         super().__init__(marca, modelo, nroRuedas)

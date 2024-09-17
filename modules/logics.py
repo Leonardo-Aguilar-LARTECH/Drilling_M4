@@ -1,4 +1,3 @@
-# from .classes import Automovil, Bicicleta, Carga, Motocicleta, Particular, EnteroError
 import time
 import csv
 from .classes import *
@@ -6,7 +5,7 @@ from os import name, path, system as st
 listado_vehiculos = []
 listado_automoviles = []
 listado_motocicletas = []
-listado_biciletas = []
+listado_bicicletas = []
 listado_veh_carga = []
 listado_veh_particular = []
 
@@ -49,7 +48,7 @@ def new_automovil():
     else:
         print("todo OK")
 
-def ingreso_vehiculos():
+def ingreso_vehiculos_f2():
     print("ingrese el numero de vehiculos a ingresar")
     try:
         contador = 0
@@ -78,10 +77,43 @@ def ingreso_vehiculos():
 
 def imprimir_automoviles():
     cont = 0
-    for auto in listado_veh_particular:
-        # return len(listado_veh_particular)
+    for auto in listado_automoviles:
         cont += 1
-        print(f"automovil {cont}: marca {auto.marca} modelo {auto.modelo} cilindrada {auto.cilindrada}cc")
+        print(f"datos del automovil #{cont}: marca: {auto.marca}, modelo: {auto.modelo}, {auto.nroRuedas} Ruedas, {auto.velocidad} km/h, cilindrada: {auto.cilindrada}cc")
+
+def imprimir_Veh_particulares():
+    cont = 0
+    print("Listado Vehiculos Particulares")
+    for auto in listado_veh_particular:
+        cont += 1
+        print(f"datos del automovil #{cont}: marca: {auto.marca}, modelo: {auto.modelo}, {auto.nroRuedas} Ruedas, {auto.velocidad} km/h, cilindrada: {auto.cilindrada}cc, {auto.puestos} asientos")
+
+def imprimir_Veh_carga():
+    cont = 0
+    print("Listado Vehiculos de Carga")
+    for auto in listado_veh_carga:
+        cont += 1
+        print(f"datos del automovil #{cont}: marca: {auto.marca}, modelo: {auto.modelo}, {auto.nroRuedas} Ruedas, {auto.velocidad} km/h, cilindrada: {auto.cilindrada}cc, capacidad de carga {auto.carga}kg.")
+
+def imprimir_bicicletas():
+    cont = 0
+    print("Listado Bicicletas")
+    for bici in listado_bicicletas:
+        cont += 1
+        print(f"datos del bicimovil #{cont}: marca: {bici.marca}, modelo: {bici.modelo}, {bici.nroRuedas} Ruedas, tipo: {bici.tipo}")
+
+def imprimir_motocicletas():
+    cont = 0
+    print("Listado motocicletas")
+    for moto in listado_motocicletas:
+        cont += 1
+        print(f"datos del motomovil #{cont}: marca: {moto.marca}, modelo: {moto.modelo}, {moto.nroRuedas} Ruedas, tipo: {moto.tipo}, {moto.nroRadios} radios, cuadro: {moto.cuadro}, motor: {moto.motor}")
+
+def imprimir_Vehiculos()
+    imprimir_Veh_particulares()
+    imprimir_Veh_carga()
+    imprimir_bicicletas()
+    imprimir_motocicletas()
 
 def guardar_automoviles():
     Vehiculo.guardar_Vehiculos()
