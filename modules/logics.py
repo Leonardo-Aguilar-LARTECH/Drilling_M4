@@ -95,6 +95,7 @@ def guardar_automoviles():
     Vehiculo.guardar_Vehiculos()
     Automovil.guardar_Automovil()
     Particular.guardar_veh_particular()
+    Carga.guardar_veh_carga()
 
 
 def leer_automoviles():
@@ -115,3 +116,4 @@ def leer_automoviles():
     Vehiculo.leer_vehiculos()
     Automovil.leer_automoviles()
     Particular.leer_veh_particular()
+    Carga.leer_veh_carga()

@@ -41,6 +41,7 @@ class Automovil(Vehiculo):
         self.velocidad = velocidad
         self.cilindrada = cilindrada
     
+    @staticmethod
     def guardar_Automovil():
         archivo = open("modules/db/db_automoviles.csv", "w", encoding="UTF-8")
         cont = 0
@@ -49,6 +50,7 @@ class Automovil(Vehiculo):
         else:
             archivo.close()
     
+    @staticmethod
     def leer_automoviles():
         if not path.exists("modules/db/db_automoviles.csv"):
             archivo = open("modules/db/db_automoviles.csv","w", encoding="UTF-8")
@@ -70,6 +72,7 @@ class Particular(Automovil):
         super().__init__(marca, modelo, nroRuedas, velocidad, cilindrada)
         self.puestos = puestos
     
+    @staticmethod
     def guardar_veh_particular():
         archivo = open("modules/db/db_veh_particular.csv", "w", encoding="UTF-8")
         cont = 0
@@ -78,6 +81,7 @@ class Particular(Automovil):
         else:
             archivo.close()
     
+    @staticmethod
     def leer_veh_particular():
         if not path.exists("modules/db/db_veh_particular.csv"):
             archivo = open("modules/db/db_veh_particular.csv","w", encoding="UTF-8")
@@ -98,6 +102,33 @@ class Carga(Automovil):
     def __init__(self, marca: str, modelo: str, nroRuedas: int, velocidad: int, cilindrada: int, carga: int) -> None:
         super().__init__(marca, modelo, nroRuedas, velocidad, cilindrada)
         self.carga = carga
+        
+    @staticmethod
+    def guardar_veh_carga():
+        archivo = open("modules/db/db_veh_carga.csv", "w", encoding="UTF-8")
+        cont = 0
+        for auto in lg.listado_veh_carga:
+            archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.velocidad};{auto.cilindrada}\n")
+        else:
+            archivo.close()
+    
+    @staticmethod
+    def leer_veh_carga():
+        if not path.exists("modules/db/db_veh_carga.csv"):
+            archivo = open("modules/db/db_veh_carga.csv","w", encoding="UTF-8")
+        else:
+            archivo = open("modules/db/db_veh_carga.csv","r", encoding="UTF-8")
+            lineas = archivo.readlines()
+            for linea in lineas:
+                linea = linea.strip()
+                auto_data = linea.split(";")
+                marca, modelo, nroRuedas, velocidad, cilindrada = auto_data
+                automovil = Automovil(marca, modelo, int(
+                    nroRuedas), int(velocidad), int(cilindrada))
+                lg.listado_veh_carga.append(automovil)
+        archivo.close()
+        return lg.listado_veh_carga
+
 
 class Bicicleta(Vehiculo):
     def __init__(self, marca: str, modelo: str, nroRuedas: int, tipo: str) -> None:
