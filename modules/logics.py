@@ -76,7 +76,6 @@ def ingreso_vehiculos():
         print(e)
         return False
 
-
 def imprimir_automoviles():
     cont = 0
     for auto in listado_veh_particular:
@@ -84,36 +83,18 @@ def imprimir_automoviles():
         cont += 1
         print(f"automovil {cont}: marca {auto.marca} modelo {auto.modelo} cilindrada {auto.cilindrada}cc")
 
-
 def guardar_automoviles():
-    '''archivo = open("modules/db_veh_particulares.csv", "w", encoding="UTF-8")
-    cont = 0
-    for auto in listado_veh_particular:
-        archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.velocidad};{auto.cilindrada}\n")
-    else:
-        archivo.close()'''
     Vehiculo.guardar_Vehiculos()
     Automovil.guardar_Automovil()
     Particular.guardar_veh_particular()
     Carga.guardar_veh_carga()
-
+    Bicicleta.guardar_bicicletas()
+    Motocicleta.guardar_motocicletas()
 
 def leer_automoviles():
-    '''if not path.exists("modules/db_veh_particulares.csv"):
-        archivo = open("modules/db_veh_particulares.csv","w", encoding="UTF-8")
-    else:
-        archivo = open("modules/db_veh_particulares.csv","r", encoding="UTF-8")
-        lineas = archivo.readlines()
-        for linea in lineas:
-            linea = linea.strip()
-            auto_data = linea.split(";")
-            marca, modelo, nroRuedas, velocidad, cilindrada = auto_data
-            automovil = Automovil(marca, modelo, int(
-                nroRuedas), int(velocidad), int(cilindrada))
-            listado_veh_particular.append(automovil)
-    archivo.close()
-    return listado_veh_particular'''
     Vehiculo.leer_vehiculos()
     Automovil.leer_automoviles()
     Particular.leer_veh_particular()
     Carga.leer_veh_carga()
+    Bicicleta.leer_bicicletas()
+    Motocicleta.leer_motocicletas()
