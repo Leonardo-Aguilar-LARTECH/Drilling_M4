@@ -164,9 +164,9 @@ class Bicicleta(Vehiculo):
         archivo.close()
         return lg.listado_bicicletas
 
-class Motocicleta(Vehiculo):
-    def __init__(self, marca: str, modelo: str, nroRuedas: int,nroRadios: int, cuadro: str, motor: str) -> None:
-        super().__init__(marca, modelo, nroRuedas)
+class Motocicleta(Bicicleta):
+    def __init__(self, marca: str, modelo: str, nroRuedas: int,tipo: str, nroRadios: int, cuadro: str, motor: str) -> None:
+        super().__init__(marca, modelo, nroRuedas, tipo)
         self.nroRadios = nroRadios
         
         cuadros_permitidos = ("doble cuna","multitubolar","doble viga")
