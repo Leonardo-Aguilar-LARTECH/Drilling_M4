@@ -93,7 +93,7 @@ class Particular(Automovil):
                 auto_data = linea.split(";")
                 print(auto_data)
                 marca, modelo, nroRuedas, velocidad, cilindrada, puestos = auto_data
-                automovil = Automovil(marca, modelo, int(nroRuedas), int(velocidad), int(cilindrada), int(puestos))
+                automovil = Particular(marca, modelo, int(nroRuedas), int(velocidad), int(cilindrada), int(puestos))
                 lg.listado_veh_particular.append(automovil)
         archivo.close()
         return lg.listado_veh_particular
@@ -108,7 +108,7 @@ class Carga(Automovil):
         archivo = open("modules/db/db_veh_carga.csv", "w", encoding="UTF-8")
         cont = 0
         for auto in lg.listado_veh_carga:
-            archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.velocidad};{auto.cilindrada}\n")
+            archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.velocidad};{auto.cilindrada};{auto.carga} \n")
         else:
             archivo.close()
     
@@ -122,9 +122,9 @@ class Carga(Automovil):
             for linea in lineas:
                 linea = linea.strip()
                 auto_data = linea.split(";")
-                marca, modelo, nroRuedas, velocidad, cilindrada = auto_data
-                automovil = Automovil(marca, modelo, int(
-                    nroRuedas), int(velocidad), int(cilindrada))
+                marca, modelo, nroRuedas, velocidad, cilindrada, carga = auto_data
+                automovil = Carga(marca, modelo, int(
+                    nroRuedas), int(velocidad), int(cilindrada), int(carga))
                 lg.listado_veh_carga.append(automovil)
         archivo.close()
         return lg.listado_veh_carga
@@ -157,9 +157,9 @@ class Bicicleta(Vehiculo):
             for linea in lineas:
                 linea = linea.strip()
                 auto_data = linea.split(";")
-                marca, modelo, nroRuedas, velocidad, cilindrada = auto_data
-                automovil = Automovil(marca, modelo, int(
-                    nroRuedas), int(velocidad), int(cilindrada))
+                marca, modelo, nroRuedas, tipo = auto_data
+                automovil = Bicicleta(marca, modelo, int(
+                    nroRuedas), tipo)
                 lg.listado_bicicletas.append(automovil)
         archivo.close()
         return lg.listado_bicicletas
@@ -186,7 +186,7 @@ class Motocicleta(Bicicleta):
         archivo = open("modules/db/db_motocicletas.csv", "w", encoding="UTF-8")
         cont = 0
         for auto in lg.listado_motocicletas:
-            archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.velocidad};{auto.cilindrada}\n")
+            archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.tipo};{auto.nroRadios};{auto.cuadro};{auto.motor}\n")
         else:
             archivo.close()
     

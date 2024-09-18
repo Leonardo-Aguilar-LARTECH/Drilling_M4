@@ -4,12 +4,13 @@ import time
 
 repetir = False
 
+lg.leer_automoviles()
+
 while not repetir:
-    lg.leer_automoviles()
     print(lg.listado_automoviles)
     print(lg.listado_bicicletas)
     print(lg.listado_veh_carga)
-    print(lg.listado_veh_particular)
+    print("Particulares:",lg.listado_veh_particular)
     print(lg.listado_vehiculos)
     print(lg.listado_motocicletas)
     time.sleep(5)

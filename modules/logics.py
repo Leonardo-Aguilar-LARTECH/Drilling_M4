@@ -9,7 +9,6 @@ listado_bicicletas = []
 listado_veh_carga = []
 listado_veh_particular = []
 
-
 def clear_screen():
     if name == "nt":
         st("cls")
@@ -195,6 +194,7 @@ def ingreso_vehiculos():
     print("1.- Ingresar Vehiculo (general)")
     print("2.- ingresar vehiculo, segun tipo")
     print("3.- Consultar Vehiculos Ingresados")
+    print("4.- Salir del sistema")
     opcion = 0
     valor = input()
     if valor.isdigit():
@@ -202,10 +202,12 @@ def ingreso_vehiculos():
     
     if opcion == 1:
         new_automovil()
-    if opcion == 2:
+    elif opcion == 2:
         ingreso_vehiculos_f2()
-    if opcion == 3:
+    elif opcion == 3:
         imprimir_Vehiculos()
+    elif opcion == 4:
+        return True
 
 def ingreso_vehiculos_f1():
     print("ingrese el numero de vehiculos a ingresar")
