@@ -91,6 +91,7 @@ class Particular(Automovil):
             for linea in lineas:
                 linea = linea.strip()
                 auto_data = linea.split(";")
+                print(auto_data)
                 marca, modelo, nroRuedas, velocidad, cilindrada, puestos = auto_data
                 automovil = Automovil(marca, modelo, int(nroRuedas), int(velocidad), int(cilindrada), int(puestos))
                 lg.listado_veh_particular.append(automovil)
