@@ -201,7 +201,7 @@ def ingreso_vehiculos():
         opcion = int(valor)
     
     if opcion == 1:
-        new_automovil()
+        ingreso_vehiculos_f1()
     elif opcion == 2:
         ingreso_vehiculos_f2()
     elif opcion == 3:
@@ -222,7 +222,13 @@ def ingreso_vehiculos_f1():
         for i in range(1, contador + 1):
             clear_screen()
             new_automovil()
-            return True
+            imprimir_automoviles()
+            print("para continuar ingresando Automoviles ingrese 's'")
+            opcion = input()
+            if opcion.lower() == "s":
+                return False
+            else:
+                return True
     except EnteroError as e:
         print(e)
         return False
