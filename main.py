@@ -8,9 +8,8 @@ lg.leer_automoviles()
 
 while not repetir:
     repetir = lg.ingreso_vehiculos()
-
     if repetir:
-        lg.guardar_automoviles()
+        #lg.guardar_automoviles()
         repetir = True
 
 lg.guardar_automoviles()

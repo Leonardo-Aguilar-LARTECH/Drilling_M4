@@ -1,6 +1,6 @@
 import time
 import csv
-from .classes import *
+from modules.classes import *
 from os import name, path, system as st
 listado_vehiculos = []
 listado_automoviles = []
@@ -162,7 +162,7 @@ def new_motocicleta():
     if not tipo in ("urbana", "carrera"):
         raise ValueError(f"valor no Valido, debe ser 'urbana' o 'carrera'")
     print("Ingrese numero de radios de la motocicleta")
-    nroRadios = input()
+    nroRadios = int(input())
     if not isinstance(nroRadios, int):
         raise EnteroError(nroRadios)
     print("Ingrese tipo de cuadro de la motocicleta\n debe elegir entre 'doble cuna' 'multitubular' o 'doble viga'")
@@ -176,7 +176,7 @@ def new_motocicleta():
     
     try:
         motocicleta = Motocicleta(marca, modelo, nroRuedas,tipo, nroRadios, cuadro, motor)
-        listado_motocicletas.append(Motocicleta)
+        listado_motocicletas.append(motocicleta)
         return listado_motocicletas
     except ValueError as e:
         print(e)
@@ -184,8 +184,6 @@ def new_motocicleta():
         print(e)
     except Exception as e:
         print("ha ocurrido un error:", e)
-    else:
-        print("todo OK")
 
 def ingreso_vehiculos():
     clear_screen()
@@ -222,13 +220,10 @@ def ingreso_vehiculos_f1():
         for i in range(1, contador + 1):
             clear_screen()
             new_automovil()
-            imprimir_automoviles()
-            print("para continuar ingresando Automoviles ingrese 's'")
-            opcion = input()
-            if opcion.lower() == "s":
-                return False
-            else:
-                return True
+            guardar_automoviles()
+        imprimir_automoviles()
+        print("\nPara volver al menu principal presione [Enter]")
+        input()
     except EnteroError as e:
         print(e)
         return False
@@ -259,6 +254,7 @@ def ingreso_vehiculos_f2():
                 new_bicicleta()
             elif opcion == 4:
                 new_motocicleta()
+        guardar_automoviles()
         return True
     except EnteroError as e:
         print(e)
@@ -266,37 +262,48 @@ def ingreso_vehiculos_f2():
 
 def imprimir_automoviles():
     cont = 0
+    print()
+    print("Listado de Automoviles Ingresados")
+    print()
     for auto in listado_automoviles:
         cont += 1
         print(f"datos del automovil #{cont}: marca: {auto.marca}, modelo: {auto.modelo}, {auto.nroRuedas} Ruedas, {auto.velocidad} km/h, cilindrada: {auto.cilindrada}cc")
 
 def imprimir_Veh_particulares():
     cont = 0
+    print()
     print("Listado Vehiculos Particulares")
+    print()
     for auto in listado_veh_particular:
         cont += 1
         print(f"datos del automovil #{cont}: marca: {auto.marca}, modelo: {auto.modelo}, {auto.nroRuedas} Ruedas, {auto.velocidad} km/h, cilindrada: {auto.cilindrada}cc, {auto.puestos} asientos")
 
 def imprimir_Veh_carga():
     cont = 0
+    print()
     print("Listado Vehiculos de Carga")
+    print()
     for auto in listado_veh_carga:
         cont += 1
         print(f"datos del automovil #{cont}: marca: {auto.marca}, modelo: {auto.modelo}, {auto.nroRuedas} Ruedas, {auto.velocidad} km/h, cilindrada: {auto.cilindrada}cc, capacidad de carga {auto.carga}kg.")
 
 def imprimir_bicicletas():
     cont = 0
+    print()
     print("Listado Bicicletas")
+    print()
     for bici in listado_bicicletas:
         cont += 1
-        print(f"datos del bicimovil #{cont}: marca: {bici.marca}, modelo: {bici.modelo}, {bici.nroRuedas} Ruedas, tipo: {bici.tipo}")
+        print(f"datos de la bicicleta #{cont}: marca: {bici.marca}, modelo: {bici.modelo}, {bici.nroRuedas} Ruedas, tipo: {bici.tipo}")
 
 def imprimir_motocicletas():
     cont = 0
+    print()
     print("Listado motocicletas")
+    print()
     for moto in listado_motocicletas:
         cont += 1
-        print(f"datos del motomovil #{cont}: marca: {moto.marca}, modelo: {moto.modelo}, {moto.nroRuedas} Ruedas, tipo: {moto.tipo}, {moto.nroRadios} radios, cuadro: {moto.cuadro}, motor: {moto.motor}")
+        print(f"datos del motocicleta #{cont}: marca: {moto.marca}, modelo: {moto.modelo}, {moto.nroRuedas} Ruedas, tipo: {moto.tipo}, {moto.nroRadios} radios, cuadro: {moto.cuadro}, motor: {moto.motor}")
 
 def imprimir_Vehiculos():
     clear_screen()
@@ -309,23 +316,32 @@ def imprimir_Vehiculos():
     opcion = 0
     valor = input()
     if valor.isdigit():
-        opcion = valor
+        opcion = int(valor)
     
     if opcion == 1:
         imprimir_Veh_particulares()
+        print("\nPara volver al menu principal presione [Enter]")
+        input()
     elif opcion == 2:
         imprimir_Veh_carga()
+        print("\nPara volver al menu principal presione [Enter]")
+        input()
     elif opcion == 3:
         imprimir_bicicletas()
+        print("\nPara volver al menu principal presione [Enter]")
+        input()
     elif opcion == 4:
         imprimir_motocicletas()
+        print("\nPara volver al menu principal presione [Enter]")
+        input()
     elif opcion == 5:
         imprimir_Veh_particulares()
         imprimir_Veh_carga()
         imprimir_bicicletas()
         imprimir_motocicletas()
-        time.sleep(5)
-
+        print("\nPara volver al menu principal presione [Enter]")
+        input()
+    
 def guardar_automoviles():
     Vehiculo.guardar_Vehiculos()
     Automovil.guardar_Automovil()

@@ -12,13 +12,10 @@ class Vehiculo:
         
     @staticmethod
     def guardar_Vehiculos():
-        archivo = open("modules/db/db_vehiculos.csv", "w", encoding="UTF-8")
-        cont = 0
-        for vehiculo in lg.listado_vehiculos:
-            archivo.write(f"{vehiculo.marca};{vehiculo.modelo};{vehiculo.nroRuedas}\n")
-        else:
-            archivo.close()
-    
+        with open("modules/db/db_vehiculos.csv", "w", encoding="UTF-8") as archivo:
+            for vehiculo in lg.listado_vehiculos:
+                archivo.write(f"{vehiculo.marca};{vehiculo.modelo};{vehiculo.nroRuedas}\n")
+        
     @staticmethod
     def leer_vehiculos():
         if not path.exists("modules/db/db_vehiculos.csv"):
@@ -30,8 +27,8 @@ class Vehiculo:
                 linea = linea.strip()
                 auto_data = linea.split(";")
                 marca, modelo, nroRuedas = auto_data
-                automovil = Automovil(marca, modelo, int(nroRuedas))
-                lg.listado_vehiculos.append(automovil)
+                vehiculo = Automovil(marca, modelo, int(nroRuedas))
+                lg.listado_vehiculos.append(vehiculo)
         archivo.close()
         return lg.listado_vehiculos
 
@@ -43,12 +40,9 @@ class Automovil(Vehiculo):
     
     @staticmethod
     def guardar_Automovil():
-        archivo = open("modules/db/db_automoviles.csv", "w", encoding="UTF-8")
-        cont = 0
-        for auto in lg.listado_veh_particular:
-            archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.velocidad};{auto.cilindrada}\n")
-        else:
-            archivo.close()
+        with open("modules/db/db_automoviles.csv", "w", encoding="UTF-8") as archivo:
+            for auto in lg.listado_veh_particular:
+                archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.velocidad};{auto.cilindrada}\n")
     
     @staticmethod
     def leer_automoviles():
@@ -61,8 +55,7 @@ class Automovil(Vehiculo):
                 linea = linea.strip()
                 auto_data = linea.split(";")
                 marca, modelo, nroRuedas, velocidad, cilindrada = auto_data
-                automovil = Automovil(marca, modelo, int(
-                    nroRuedas), int(velocidad), int(cilindrada))
+                automovil = Automovil(marca, modelo, int(nroRuedas), int(velocidad), int(cilindrada))
                 lg.listado_automoviles.append(automovil)
         archivo.close()
         return lg.listado_automoviles
@@ -74,13 +67,10 @@ class Particular(Automovil):
     
     @staticmethod
     def guardar_veh_particular():
-        archivo = open("modules/db/db_veh_particular.csv", "w", encoding="UTF-8")
-        cont = 0
-        for auto in lg.listado_veh_particular:
-            archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.velocidad};{auto.cilindrada};{auto.puestos}\n")
-        else:
-            archivo.close()
-    
+        with open("modules/db/db_veh_particular.csv", "w", encoding="UTF-8") as archivo:
+            for auto in lg.listado_veh_particular:
+                archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.velocidad};{auto.cilindrada};{auto.puestos}\n")
+        
     @staticmethod
     def leer_veh_particular():
         if not path.exists("modules/db/db_veh_particular.csv"):
@@ -91,10 +81,9 @@ class Particular(Automovil):
             for linea in lineas:
                 linea = linea.strip()
                 auto_data = linea.split(";")
-                print(auto_data)
                 marca, modelo, nroRuedas, velocidad, cilindrada, puestos = auto_data
-                automovil = Particular(marca, modelo, int(nroRuedas), int(velocidad), int(cilindrada), int(puestos))
-                lg.listado_veh_particular.append(automovil)
+                particular = Particular(marca, modelo, int(nroRuedas), int(velocidad), int(cilindrada), int(puestos))
+                lg.listado_veh_particular.append(particular)
         archivo.close()
         return lg.listado_veh_particular
 
@@ -105,12 +94,9 @@ class Carga(Automovil):
         
     @staticmethod
     def guardar_veh_carga():
-        archivo = open("modules/db/db_veh_carga.csv", "w", encoding="UTF-8")
-        cont = 0
-        for auto in lg.listado_veh_carga:
-            archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.velocidad};{auto.cilindrada};{auto.carga} \n")
-        else:
-            archivo.close()
+        with open("modules/db/db_veh_carga.csv", "w", encoding="UTF-8") as archivo:
+            for auto in lg.listado_veh_carga:
+                archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.velocidad};{auto.cilindrada};{auto.carga}\n")
     
     @staticmethod
     def leer_veh_carga():
@@ -123,8 +109,7 @@ class Carga(Automovil):
                 linea = linea.strip()
                 auto_data = linea.split(";")
                 marca, modelo, nroRuedas, velocidad, cilindrada, carga = auto_data
-                automovil = Carga(marca, modelo, int(
-                    nroRuedas), int(velocidad), int(cilindrada), int(carga))
+                automovil = Carga(marca, modelo, int(nroRuedas), int(velocidad), int(cilindrada), int(carga))
                 lg.listado_veh_carga.append(automovil)
         archivo.close()
         return lg.listado_veh_carga
@@ -140,12 +125,9 @@ class Bicicleta(Vehiculo):
     
     @staticmethod
     def guardar_bicicletas():
-        archivo = open("modules/db/db_bicicletas.csv", "w", encoding="UTF-8")
-        cont = 0
-        for auto in lg.listado_bicicletas:
-            archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.velocidad};{auto.cilindrada}\n")
-        else:
-            archivo.close()
+        with open("modules/db/db_bicicletas.csv", "w", encoding="UTF-8") as archivo:
+            for bici in lg.listado_bicicletas:
+                archivo.write(f"{bici.marca};{bici.modelo};{bici.nroRuedas};{bici.tipo}\n")
     
     @staticmethod
     def leer_bicicletas():
@@ -158,9 +140,8 @@ class Bicicleta(Vehiculo):
                 linea = linea.strip()
                 auto_data = linea.split(";")
                 marca, modelo, nroRuedas, tipo = auto_data
-                automovil = Bicicleta(marca, modelo, int(
-                    nroRuedas), tipo)
-                lg.listado_bicicletas.append(automovil)
+                bicicleta = Bicicleta(marca, modelo, int(nroRuedas), tipo)
+                lg.listado_bicicletas.append(bicicleta)
         archivo.close()
         return lg.listado_bicicletas
 
@@ -169,7 +150,7 @@ class Motocicleta(Bicicleta):
         super().__init__(marca, modelo, nroRuedas, tipo)
         self.nroRadios = nroRadios
         
-        cuadros_permitidos = ("doble cuna","multitubolar","doble viga")
+        cuadros_permitidos = ("doble cuna","multitubular","doble viga")
         if cuadro in cuadros_permitidos:
             self.cuadro = cuadro
         else:
@@ -183,13 +164,10 @@ class Motocicleta(Bicicleta):
     
     @staticmethod
     def guardar_motocicletas():
-        archivo = open("modules/db/db_motocicletas.csv", "w", encoding="UTF-8")
-        cont = 0
-        for auto in lg.listado_motocicletas:
-            archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.tipo};{auto.nroRadios};{auto.cuadro};{auto.motor}\n")
-        else:
-            archivo.close()
-    
+        with open("modules/db/db_motocicletas.csv", "w", encoding="UTF-8") as archivo:
+            for auto in lg.listado_motocicletas:
+                archivo.write(f"{auto.marca};{auto.modelo};{auto.nroRuedas};{auto.tipo};{auto.nroRadios};{auto.cuadro};{auto.motor}\n")
+        
     @staticmethod
     def leer_motocicletas():
         if not path.exists("modules/db/db_motocicletas.csv"):
@@ -200,10 +178,9 @@ class Motocicleta(Bicicleta):
             for linea in lineas:
                 linea = linea.strip()
                 auto_data = linea.split(";")
-                marca, modelo, nroRuedas, velocidad, cilindrada = auto_data
-                automovil = Automovil(marca, modelo, int(
-                    nroRuedas), int(velocidad), int(cilindrada))
-                lg.listado_motocicletas.append(automovil)
+                marca, modelo, nroRuedas, tipo, nroRadios, cuadro, motor  = auto_data
+                motocicleta = Motocicleta(marca, modelo, int(nroRuedas), tipo, int(nroRadios), cuadro, motor)
+                lg.listado_motocicletas.append(motocicleta)
         archivo.close()
         return lg.listado_motocicletas
 
