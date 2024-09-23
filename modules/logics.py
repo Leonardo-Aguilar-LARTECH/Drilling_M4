@@ -2,20 +2,34 @@ import time
 import csv
 from modules.classes import *
 from os import name, path, system as st
+'''
+importacion de las librerias necesarias para la operacion de la logica del programa
+'''
 listado_vehiculos = []
 listado_automoviles = []
 listado_motocicletas = []
 listado_bicicletas = []
 listado_veh_carga = []
 listado_veh_particular = []
+'''
+creaccion variables tipo lista donde se almacenaran los datos de los vehiculos registrados por el sistema
+'''
 
 def clear_screen():
+    '''
+    Funcion dedicada a limpiar la consola para imprimir nueva informacion en ella
+    '''
     if name == "nt":
         st("cls")
     else:
         st("clear")
 
 def new_automovil():
+    """
+        Funcion para Crear una nueva instancia de clase Automovil
+        solicitando los parametros al usuario y luego generando la nueva instancia
+        finalmente almacenando la nueva instancia en el listado de automoviles
+    """
     clear_screen()
     print("Ingrese Marca del Automovil")
     marca = input()
@@ -227,7 +241,7 @@ def ingreso_vehiculos_f1():
     except EnteroError as e:
         print(e)
         return False
-    
+
 def ingreso_vehiculos_f2():
     print("ingrese el numero de vehiculos a ingresar")
     try:
@@ -306,17 +320,29 @@ def imprimir_motocicletas():
         print(f"datos del motocicleta #{cont}: marca: {moto.marca}, modelo: {moto.modelo}, {moto.nroRuedas} Ruedas, tipo: {moto.tipo}, {moto.nroRadios} radios, cuadro: {moto.cuadro}, motor: {moto.motor}")
 
 def imprimir_Vehiculos():
+    """
+    Funcion que imprime los datos de los vehiculos 
+    segun la preferencia indicada
+    [1] imprime listado de automoviles particulares
+    [2] imprime listado de automoviles de carga
+    [3] imprime listado de bicicletas
+    [4] imprime listado de motocicletas
+    [5] imprime listado de todos los vehiculos
+    
+    """
     clear_screen()
     print("vehiculos a consultar: (seleccione opcion correspondiente)")
-    print("1.- Vehiculos Particulares")
-    print("2.- Vehiculos de Carga")
-    print("3.- Bicicletas")
-    print("4.- Motocicletas")
-    print("5.- Todos los Vehiculos Ingresados")
+    print("[1].- Vehiculos Particulares")
+    print("[2].- Vehiculos de Carga")
+    print("[3].- Bicicletas")
+    print("[4].- Motocicletas")
+    print("[5].- Todos los Vehiculos Ingresados")
     opcion = 0
     valor = input()
     if valor.isdigit():
         opcion = int(valor)
+    else:
+        raise EnteroError(valor)
     
     if opcion == 1:
         imprimir_Veh_particulares()
@@ -341,8 +367,19 @@ def imprimir_Vehiculos():
         imprimir_motocicletas()
         print("\nPara volver al menu principal presione [Enter]")
         input()
+    else:
+        print("Valor ingresado no es valido, debe indicar uno de los valores listados")
+        print("Presione [Enter] para volver a intentar")
+        input()
+        imprimir_Vehiculos()
     
 def guardar_automoviles():
+    """
+    Funcion de llamado a los metodos de cada clase que vuelcan 
+    los datos de los vehiculos ingresados en las variables listas 
+    correspondiente a cada clase, las cuales seran leidas en el 
+    proximo acceso al programa
+    """
     Vehiculo.guardar_Vehiculos()
     Automovil.guardar_Automovil()
     Particular.guardar_veh_particular()
@@ -351,9 +388,16 @@ def guardar_automoviles():
     Motocicleta.guardar_motocicletas()
 
 def leer_automoviles():
+    '''
+    Funcion de llamado a todos los metodos de clases que leen los datos del archivo data base, 
+    y lo vuelcan a las variables de listas especificas de cada clase
+    '''
     Vehiculo.leer_vehiculos()
     Automovil.leer_automoviles()
     Particular.leer_veh_particular()
     Carga.leer_veh_carga()
     Bicicleta.leer_bicicletas()
     Motocicleta.leer_motocicletas()
+    
+    """_summary_
+    """
